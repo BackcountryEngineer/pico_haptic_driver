@@ -385,9 +385,9 @@ int main() {
   set_mode(DRV2605_MODE_INTTRIG);
 
   int effect = 1;
-  printf("11.2 Waveform Library Effects List");
+  printf("11.2 Waveform Library Effects List\n");
 
-  while(effect < 10) {
+  while(effect < 117) {
     identify_effect(effect);
 
     set_waveform(0, effect);
@@ -401,9 +401,6 @@ int main() {
       effect = 1;
     }
   }
-
-  printf("Stopping all\n");
-  stop();
 
   return 0;
 }

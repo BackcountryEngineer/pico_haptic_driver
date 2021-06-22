@@ -10,9 +10,6 @@ bool drv2605_init() {
   gpio_set_function(2, GPIO_FUNC_I2C);
   gpio_set_function(3, GPIO_FUNC_I2C);
 
-  //For some reason i2c doesn't start working until you probe it a few times
-  // while (i2c_read_blocking(I2C_PORT, DRV2605_ADDR, NULL, 1, true) == PICO_ERROR_GENERIC);
-
   //Check chip ID is 3 or 7 (DRV2605 or DRV2605L).
   uint8_t status = read_reg(DRV2605_REG_STATUS);
   uint8_t id = (status >> 5) & 0x07;
@@ -70,19 +67,17 @@ uint8_t read_reg(uint8_t reg) {
       return read;
     }
   }
-  printf("Read %02x from reg %02x\n", read, reg);
   return read;
 }
 
 bool write_reg(uint8_t reg, uint8_t val) {
   uint8_t data[2];
-  data[1] = reg;
-  data[2] = val;
+  data[0] = reg;
+  data[1] = val;
   if (i2c_write_blocking(I2C_PORT, DRV2605_ADDR, data, 2, false) == PICO_ERROR_GENERIC) {
     printf("I2C write failed, is the device connected properly?\n");
     return false;
   }
-  printf("Wrote %02x to %02x\n", val, reg);
   return true;
 }
 

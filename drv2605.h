@@ -70,4 +70,6 @@ void set_realtimeValue(uint8_t rtp);
 void use_ERM();
 void use_LRA();
 
+const char* identify_effect(int effect);
+
 #endif

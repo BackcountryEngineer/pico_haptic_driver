@@ -14,28 +14,28 @@ pico_sdk_init()
 
 link_directories(libmicroros)
 
-add_executable(pico_ping_pong
-    pico_ping_pong.c
-    pico_uart_transport.c
-)
-target_link_libraries(pico_ping_pong
-    pico_stdlib
-    microros
-)
+# add_executable(pico_ping_pong
+#     pico_ping_pong.c
+#     pico_uart_transport.c
+# )
+# target_link_libraries(pico_ping_pong
+#     pico_stdlib
+#     microros
+# )
 
-target_include_directories(pico_ping_pong
-    PUBLIC
-    libmicroros/include
-)
+# target_include_directories(pico_ping_pong
+#     PUBLIC
+#     libmicroros/include
+# )
 
-add_executable(i2c_bus_scan
-    bus_scan.c
-)
+# add_executable(i2c_bus_scan
+#     bus_scan.c
+# )
 
-target_link_libraries(i2c_bus_scan 
-    pico_stdlib 
-    hardware_i2c
-)
+# target_link_libraries(i2c_bus_scan 
+#     pico_stdlib 
+#     hardware_i2c
+# )
 
 add_executable(pico_haptic_control
     pico_haptic_control.c
@@ -63,8 +63,6 @@ add_compile_options(-Wall
     -Wno-maybe-uninitialized
 )
 
-pico_enable_stdio_usb(pico_ping_pong 0)
-pico_enable_stdio_uart(pico_ping_pong 1)
 add_compile_definitions(PICO_UART_ENABLE_CRLF_SUPPORT=0)
 add_compile_definitions(PICO_STDIO_ENABLE_CRLF_SUPPORT=0)
 add_compile_definitions(PICO_STDIO_DEFAULT_CRLF=0)

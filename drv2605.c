@@ -90,7 +90,7 @@ void use_LRA() {
   write_reg(DRV2605_REG_FEEDBACK, read_reg(DRV2605_REG_FEEDBACK) | 0x80);
 }
 
-const char* identify_effect(int effect) {
+const char* identify_effect(uint8_t effect) {
   if (effect == 1) {
     return ("1 − Strong Click - 100%%");
   }

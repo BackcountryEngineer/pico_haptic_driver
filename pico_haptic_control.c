@@ -22,11 +22,11 @@ std_msgs__msg__UInt8 effect_id;
 std_msgs__msg__String description;
 
 void vibrate_cb(const void * msgin) {
-  std_msgs__msg__UInt8 * effect = (std_msgs__msg__UInt8 *)msgin;
+  const std_msgs__msg__UInt8 * msg = (const std_msgs__msg__UInt8 *)msgin;
   gpio_put(LED_PIN, 1);
-  sprintf(description.data.data, identify_effect((uint8_t)effect));
+  sprintf(description.data.data, identify_effect(msg->data));
   description.data.size = strlen(description.data.data);
-  set_waveform(0, (uint8_t) effect);
+  set_waveform(0, msg->data);
   set_waveform(1, 0);
   go();
   rcl_publish(&publisher, &description, NULL);

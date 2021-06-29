@@ -12,34 +12,20 @@ set(PICO_HAPTIC_CONTROLS_PATH ${PROJECT_SOURCE_DIR})
 # Initialize the SDK
 pico_sdk_init()
 
-link_directories(libmicroros)
+link_directories(pico_uros_sdk/libmicroros)
 
-# add_executable(pico_ping_pong
-#     pico_ping_pong.c
-#     pico_uart_transport.c
-# )
-# target_link_libraries(pico_ping_pong
-#     pico_stdlib
-#     microros
-# )
+add_executable(i2c_bus_scan
+    bus_scan.c
+)
 
-# target_include_directories(pico_ping_pong
-#     PUBLIC
-#     libmicroros/include
-# )
-
-# add_executable(i2c_bus_scan
-#     bus_scan.c
-# )
-
-# target_link_libraries(i2c_bus_scan 
-#     pico_stdlib 
-#     hardware_i2c
-# )
+target_link_libraries(i2c_bus_scan 
+    pico_stdlib 
+    hardware_i2c
+)
 
 add_executable(pico_haptic_control
     pico_haptic_control.c
-    pico_uart_transport.c
+    pico_uros_sdk/pico_uart_transport.c
     drv2605.c
 )
 
@@ -51,7 +37,7 @@ target_link_libraries(pico_haptic_control
 
 target_include_directories(pico_haptic_control
     PUBLIC
-    libmicroros/include
+    pico_uros_sdk/libmicroros/include
 )
 
 SET(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -ffunction-sections -fdata-sections")
